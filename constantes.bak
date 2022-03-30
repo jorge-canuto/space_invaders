@@ -1,0 +1,27 @@
+#lang racket
+
+(require 2htdp/image)
+(require 2htdp/universe)
+
+(provide (all-defined-out))
+
+
+;; space invaders
+
+;; =================
+;; Constantes:
+
+(define ALTURA-CENARIO 600)
+(define LARGURA-CENARIO 800)
+(define CENARIO (empty-scene LARGURA-CENARIO ALTURA-CENARIO))
+(define IMG-NAVE (bitmap "nave.png"))
+(define IMG-NAVE-INIMIGA (scale 0.5 (bitmap "nave_inimiga.jpg")))
+
+(define LARGURA-NAVE (image-width IMG-NAVE))
+(define ALTURA-NAVE (image-height IMG-NAVE))
+(define LARGURA-NAVE-INIMIGA (image-width IMG-NAVE-INIMIGA))
+(define ALTURA-NAVE-INIMIGA (image-height IMG-NAVE-INIMIGA))
+
+
+;;(define TC-VIRA " ")
+;;(define TC-REINICIO "\r")
