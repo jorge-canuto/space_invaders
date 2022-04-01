@@ -7,7 +7,7 @@
 - Inimigos aparecem com o tempo
 - Inimigos atacam sua nave
 ## Análise de domínio
-
+   <img src="https://github.com/jorge-canuto/space_invaders/blob/master/images/cenarios.pdf" height="600" width="400">
 ## To Do
 Lista de tarefas a fazer
 - [X] Identificar e desenhar cenários
