@@ -8,7 +8,6 @@
 - Inimigos atacam sua nave
 ## Análise de domínio
    <img src="https://github.com/jorge-canuto/space_invaders/blob/master/images/cenarios.jpg" height="1000" width="700">
-   
 
 ## To Do
 Lista de tarefas a fazer
