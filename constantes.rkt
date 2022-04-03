@@ -11,17 +11,29 @@
 ;; =================
 ;; Constantes:
 
-(define ALTURA-CENARIO 150)
-(define LARGURA-CENARIO 200)
-(define CENARIO (empty-scene LARGURA-CENARIO ALTURA-CENARIO))
+;; IMAGENS
 (define IMG-NAVE (scale 0.3(bitmap "C:/Users/Jorge/Downloads/UFPR/6° periodo/Oficina de Computação/desenvolvimento do jogo/space_invaders/images/nave.png")))
 (define IMG-NAVE-INIMIGA (scale 0.5 (bitmap "C:/Users/Jorge/Downloads/UFPR/6° periodo/Oficina de Computação/desenvolvimento do jogo/space_invaders/images/nave_inimiga.png")))
 (define IMG-FUNDO-CENARIO (scale 1.9 (bitmap "C:/Users/Jorge/Downloads/UFPR/6° periodo/Oficina de Computação/desenvolvimento do jogo/space_invaders/images/fundo_cenario.png")))
+(define IMG-TIRO (scale 0.2 (bitmap "C:/Users/Jorge/Downloads/UFPR/6° periodo/Oficina de Computação/desenvolvimento do jogo/space_invaders/images/tiro.png")))
+(define IMG-TIRO-INIMIGO (scale 0.15 (bitmap "C:/Users/Jorge/Downloads/UFPR/6° periodo/Oficina de Computação/desenvolvimento do jogo/space_invaders/images/tiro_inimigo.png"))) 
+;; CENARIO
+(define ALTURA-CENARIO 150)
+(define LARGURA-CENARIO 200)
+(define CENARIO (empty-scene LARGURA-CENARIO ALTURA-CENARIO))
+;; PERSONAGENS
+(define DX-PADRAO-NAVE 3)
+(define DY-PADRAO-NAVE 3)
+(define DX-PADRAO-NAVE-INIMIGA 3)
+(define DY-PADRAO-NAVE-INIMIGA 3)
 (define LARGURA-NAVE (image-width IMG-NAVE))
 (define ALTURA-NAVE (image-height IMG-NAVE))
 (define LARGURA-NAVE-INIMIGA (image-width IMG-NAVE-INIMIGA))
 (define ALTURA-NAVE-INIMIGA (image-height IMG-NAVE-INIMIGA))
-
-
-;;(define TC-VIRA " ")
-;;(define TC-REINICIO "\r")
+(define TEMPO-APARECE-INIMIGO 4)
+;; TECLADO
+(define TECLA-ATIRAR "f")
+(define TECLA-CIMA "w")
+(define TECLA-BAIXO "s")
+(define TECLA-DIREITA "d")
+(define TECLA-ESQUERDA "a")

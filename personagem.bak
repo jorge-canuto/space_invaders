@@ -1,0 +1,8 @@
+#lang racket
+
+(require 2htdp/image)
+(require 2htdp/universe)
+
+(provider (all-define-out))
+
+;; Definições de dados:
