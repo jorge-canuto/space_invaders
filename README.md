@@ -1,5 +1,5 @@
 # Space Invaders
-## _Um jogo de navinha estilo Ikagura_
+## _Um jogo de navinha estilo Ikaruga_
 
 ## Features
 - Movimentar a navinha em todas as principais direções
