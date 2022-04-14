@@ -3,22 +3,28 @@
 (require 2htdp/image)
 (require 2htdp/universe)
 (require "constantes.rkt")
+(require "utils.rkt")
+
+(provide (all-defined-out))
+
 
 ;; Definições de dados:
 
-(define-struct personagem (x y dx dy))
+(define-struct personagem (x y dx dy)#:transparent)
 ;; Personagem é (make-personagem Natural Natural Inteiro Inteiro Natural Natural)
 ;; interp. posicao do personagem nos eixos x e y, em pixels.
 ;; e dx e dy representando o vetor de deslocamento
 ;; isto é, direção, sentido e módulo da velocidade
 
 ;; Exemplos NAVE:
-(define NAVE-INICIO (make-personagem (/ LARGURA-NAVE 2) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE DY-PADRAO-NAVE))
+(define NAVE-INICIO (make-personagem 0 (/ ALTURA-CENARIO 2) 0 0))
+(define NAVE-MEIO (make-personagem (/ LARGURA-CENARIO 2) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE DY-PADRAO-NAVE))
 (define NAVE-FINAL-CENARIO (make-personagem (- LARGURA-CENARIO LARGURA-NAVE) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE DY-PADRAO-NAVE))
 
 ;; Exemplos NAVE-INIMIGA
 (define NAVE-INIMIGA-INICIO (make-personagem (- LARGURA-CENARIO LARGURA-NAVE) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE-INIMIGA DY-PADRAO-NAVE-INIMIGA))
-(define NAVE-INIMIGA-FINAL-CENARIO (make-personagem (/ LARGURA-NAVE 2) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE-INIMIGA DY-PADRAO-NAVE-INIMIGA))
+(define NAVE-INIMIGA-MEIO (make-personagem (/ LARGURA-CENARIO 2) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE-INIMIGA DY-PADRAO-NAVE-INIMIGA))
+(define NAVE-INIMIGA-FINAL-CENARIO (make-personagem LARGURA-CENARIO (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE-INIMIGA DY-PADRAO-NAVE-INIMIGA))
 
 
 ;; desenha tela: Image -> Image
@@ -30,6 +36,80 @@
                (/ LARGURA-CENARIO 2)
                cena)
   )
+;;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+(define (move-personagem p)
+  (let* (
+      [novo-x (+ (personagem-x p) (personagem-dx p))]
+      [novo-y (+ (personagem-y p) (personagem-dy p))]
+      [bateu-no-limite-direito? (> novo-x LARGURA-CENARIO)]
+      [bateu-no-limite-esquerdo? (< novo-x 0)]
+      [bateu-no-limite-baixo? (> novo-y ALTURA-CENARIO)]
+      [bateu-no-limite-cima? (< novo-y 0)]
+      )
+    
+  (make-personagem
+   ;x:
+   (cond
+     [bateu-no-limite-direito? LARGURA-CENARIO]
+     [bateu-no-limite-esquerdo? 0]
+     [else novo-x]
+   )
+   ;y:
+   (cond
+     [bateu-no-limite-cima? 0]
+     [bateu-no-limite-baixo? ALTURA-CENARIO]
+     [else novo-y]
+   )
+   ;dx
+   (if (or bateu-no-limite-direito? bateu-no-limite-esquerdo?)
+       (- (personagem-dx p)) ;then
+       (personagem-dx p))  ;else
+   ;dy
+   (if (or bateu-no-limite-cima? bateu-no-limite-baixo?)
+       (- (personagem-dy p)) ;then
+       (personagem-dy p))  ;else
+   )
+    )
+  )
+;;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+;; move-personagens: List<Personagem> -> List<Personagem>
+;; move todos os personagens de uma lista
+
+;; stub
+;;(define move-persongens ldp) ldp)
+
+(define (move-personagens ldp)
+  (map move-personagem ldp)
+  )
+
+;; colidindo?: Personagem Personagem -> boolean
+;; retorna true se par de personagens estiverem colidindo, ou false caso contrario
+
+;; colidindo?: Personagem Personagem -> boolean
+;; retorna true se par de personagens estiverem colidindo, ou false caso contrario
+
+;; stub
+;; (define (colidindo? p1 p2) #true)
+
+(define (colidindo? p1 p2)
+  (let* (
+         [soma-dos-raios-dos-personagens (+ (/ LARGURA-NAVE 2) (/ LARGURA-NAVE-INIMIGA 2))]
+         )
+    (<= (distancia (personagem-x p1) (personagem-y p1) (personagem-x p2) (personagem-y p2))
+        soma-dos-raios-dos-personagens)
+      )
+  )
+
+;; colidindo-com-algum?: Personagem List<Personagem> -> boolean
+;; retorna true se o primeiro personagem colide com algum dos outros personagens
+
+;; stub
+;; (define (colidindo-com-algum? p1 ldin) #false)
+
+(define (colidindo-com-algum? p ldin)
+  (ormap (lambda (p1) (colidindo? p p1)) ldin)
+ )
 
 ;; desenha o personagem
 ;; Personagem Image Image -> Image
@@ -41,3 +121,11 @@
                )
   )
 
+;; desenha-personagens: List<Personagem> Image Image -> Image
+;; desenha varios personagens
+
+;(define (desenha-personagens ldp img fundo)
+(define (desenha-personagens  ldin img fundo)
+  (cond [(empty? ldin) fundo]                   ;CASO BASE (CONDIÇÃO DE PARADA)
+        [else (desenha-personagem (first ldin) img                 ;String
+                   (desenha-personagens (rest ldin) img fundo))]))

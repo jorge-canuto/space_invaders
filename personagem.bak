@@ -2,7 +2,42 @@
 
 (require 2htdp/image)
 (require 2htdp/universe)
-
-(provider (all-define-out))
+(require "constantes.rkt")
 
 ;; Definições de dados:
+
+(define-struct personagem (x y dx dy))
+;; Personagem é (make-personagem Natural Natural Inteiro Inteiro Natural Natural)
+;; interp. posicao do personagem nos eixos x e y, em pixels.
+;; e dx e dy representando o vetor de deslocamento
+;; isto é, direção, sentido e módulo da velocidade
+
+;; Exemplos NAVE:
+(define NAVE-INICIO (make-personagem 0 (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE DY-PADRAO-NAVE))
+(define NAVE-FINAL-CENARIO (make-personagem (- LARGURA-CENARIO LARGURA-NAVE) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE DY-PADRAO-NAVE))
+
+;; Exemplos NAVE-INIMIGA
+(define NAVE-INIMIGA-INICIO (make-personagem (- LARGURA-CENARIO LARGURA-NAVE) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE-INIMIGA DY-PADRAO-NAVE-INIMIGA))
+(define NAVE-INIMIGA-FINAL-CENARIO (make-personagem (/ LARGURA-NAVE 2) (/ ALTURA-CENARIO 2) DX-PADRAO-NAVE-INIMIGA DY-PADRAO-NAVE-INIMIGA))
+
+
+;; desenha tela: Image -> Image
+;; desenha a tela de fundo do jogo
+
+(define (desenha-tela img cena)
+  (place-image img
+               (/ ALTURA-CENARIO 2)
+               (/ LARGURA-CENARIO 2)
+               cena)
+  )
+
+;; desenha o personagem
+;; Personagem Image Image -> Image
+(define (desenha-personagem p img fundo)
+ (place-image img
+               (personagem-x p)
+               (personagem-y p)
+               (desenha-tela IMG-FUNDO-CENARIO fundo)
+               )
+  )
+
