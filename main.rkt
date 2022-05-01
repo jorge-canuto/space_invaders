@@ -6,7 +6,6 @@
 
 ;; Jogo -> Jogo
 ;; inicie o mundo com main 
-;; 
 (define (main n)
   (big-bang n               ; Jogo   (estado inicial do mundo)
             (on-tick   atualiza-jogo)     ; Jogo -> Jogo    
@@ -16,8 +15,8 @@
             (on-key    trata-tecla-jogo) ; Jogo KeyEvent -> Jogo
                                     ;(retorna um novo estado do mundo dado o estado atual e uma interação com o teclado)
     
-   ;;       (on-release release-expr) ; -> keyEvent,  estado do domundo ? HandlerResult 
-
+            (on-release release-tecla) ; -> Jogo, keyEvent -> Jogo
+                                    ;(retorna um novo estado do mundo dado o estado atual e uma interação com o teclado)
     )
   )    
 

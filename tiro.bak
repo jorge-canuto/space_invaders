@@ -1,1 +1,53 @@
 #lang racket
+
+(require 2htdp/image)
+(require "constantes.rkt")
+
+(provide (all-defined-out))
+
+;; Definições de dados:
+(define-struct tiro (x y dx))
+;; Tiro é (make-personagem Natural Natural Inteiro)
+;; interp. tiro do personagem nos eixos x e y, em pixels.
+;; dx reprensenta a velocidade de deslocamento
+
+;; Exemplos NAVE:
+(define TIRO-INICIO (make-tiro (/ LARGURA-TIRO 2) (/ ALTURA-CENARIO 2) 3))
+(define TIRO-MEIO (make-tiro (/ LARGURA-CENARIO 2) (/ ALTURA-CENARIO 2) 3))
+(define TIRO-FINAL-CENARIO (make-tiro (- LARGURA-CENARIO LARGURA-TIRO) (/ ALTURA-CENARIO 2) 3))
+
+;; desenha o tiro
+;; Tiro Image Image -> Image
+(define (desenha-tiro t img fundo)
+ (place-image img
+               (tiro-x t)
+               (tiro-y t)
+               fundo
+               )
+  )
+
+(define (desenha-tiros  ldt img fundo)
+  (cond [(empty? ldt) fundo]                   ;CASO BASE (CONDIÇÃO DE PARADA)
+        [else (desenha-tiro (first ldt) img                
+                   (desenha-tiros (rest ldt) img fundo))]))
+
+
+(define (move-tiro t)
+  (let* (
+      [novo-x (+ (tiro-x t) (tiro-dx t))]
+      )
+  (make-tiro
+   ;x:
+   novo-x
+   ;y:
+   (tiro-y t)
+   ;dx
+   (tiro-dx t)
+    )
+   )
+  )
+
+
+(define (move-tiros ldt)
+  (map move-tiro ldt)
+  )
