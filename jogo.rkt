@@ -166,7 +166,7 @@
                    (desenha-personagem (jogo-nave j) IMG-NAVE
                                       (desenha-personagens (jogo-ldin j) IMG-NAVE-INIMIGA
                                                            (desenha-tiros (jogo-ldt j) IMG-TIRO
-                                                                          (desenha-tiros (jogo-ldtin j) IMG-TIRO CENARIO)
+                                                                          (desenha-tiros (jogo-ldtin j) IMG-TIRO-INIMIGO CENARIO)
                                                                           )
                                                            )
                                       )              
