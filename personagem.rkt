@@ -56,7 +56,7 @@
 ;; ------------------------------------ INICIO DAS FUNCOES DO PERSONAGEM -----------------------------------------
 
 ;; Personagem -> Personagem
-;; move o personagem de acordo com seu valor dx e dy
+;; move o personagem de acordo com seu valor dx
 
 (define (move-personagem p)
   (let* (

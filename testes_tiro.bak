@@ -1,0 +1,12 @@
+#lang racket
+
+(require rackunit)
+(require 2htdp/image)
+
+(require "constantes.rkt")
+(require "tiro.rkt")
+
+
+; move-personagem
+(check-equal? (move-tiro (make-tiro (/ LARGURA-CENARIO 2) (/ ALTURA-CENARIO 2) DX-PADRAO-TIRO)) 
+                         (make-tiro (+ (/ LARGURA-CENARIO 2) DX-PADRAO-TIRO) (/ ALTURA-CENARIO 2) DX-PADRAO-TIRO))

@@ -7,7 +7,16 @@
 
 
 ;; Testes trata-tecla
-(check-equal? (trata-tecla-vaca (make-personagem MEIO-X Y-PADRAO-VACA 3 5   30 40) " ")
-              (make-personagem MEIO-X Y-PADRAO-VACA -3 -5   30 40))
-(check-equal? (trata-tecla-vaca (make-personagem MEIO-X Y-PADRAO-VACA 3 5   30 40) "a")
-              (make-personagem MEIO-X Y-PADRAO-VACA 3 5   30 40))
+(check-equal? (trata-tecla-nave (make-personagem (/ LARGURA-CENARIO 2) (/ ALTURA-CENARIO 2) 3 5) TECLA-DIREITA)
+              (make-personagem (+ (/ LARGURA-CENARIO 2) 3) (/ ALTURA-CENARIO 2) 3 5))
+(check-equal? (trata-tecla-nave (make-personagem (/ LARGURA-CENARIO 2) (/ ALTURA-CENARIO 2) 3 5) TECLA-ESQUERDA)
+              (make-personagem (- (/ LARGURA-CENARIO 2) 3) (/ ALTURA-CENARIO 2) -3 5))
+
+
+;; Testes atualiza-jogo
+; CASO NORMAL
+(check-equal? (atualiza-jogo JOGO-INICIO)
+              (make-jogo NAVE-INICIO
+                         (list (make-personagem (- (- LARGURA-CENARIO (/ LARGURA-NAVE-INIMIGA 2)) 3) (/ ALTURA-CENARIO 2)
+                                                DX-PADRAO-NAVE-INIMIGA DY-PADRAO-NAVE-INIMIGA))
+                         empty empty 0 0 #false))

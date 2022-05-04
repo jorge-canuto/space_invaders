@@ -1,0 +1,12 @@
+#lang racket
+
+(require rackunit)
+(require 2htdp/image)
+
+(require "constantes.rkt")
+(require "personagem.rkt")
+
+
+; NAVE
+(check-equal? (move-personagem (make-personagem MEIO-X MEIO-Y 3 4    40 30)) 
+              (make-personagem (+ MEIO-X 3) (+ MEIO-Y 4) 3 4    40 30)) 

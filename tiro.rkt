@@ -65,6 +65,9 @@
     )))
 
 
+
+
+
 ;; move-tiros: List<Tiros> -> List<Tiros>
 ;; Move todos os Tiros de uma lista
 
@@ -73,6 +76,39 @@
 
 (define (move-tiros ldt)
   (map move-tiro ldt))
+
+
+
+
+;; Tiro -> Tiro
+;; move o Tiro dos inimigos de acordo com seu valor dx
+
+;stub
+;(define (move-tiro t) t)
+
+(define (move-tiro-inimigo t)
+  (let* (
+      [novo-x (- (tiro-x t) (tiro-dx t))]
+      )
+  (make-tiro
+   ;x:
+   novo-x
+   ;y:
+   (tiro-y t)
+   ;dx
+   (tiro-dx t)
+    )))
+
+
+;; move-tiros-inimgos: List<Tiros> -> List<Tiros>
+;; Move todos os Tiros dos inimigos de uma lista
+
+;stub
+;(define (move-tiros-inimgos ldtin) ldtin)
+
+(define (move-varios-tiros-inimigos ldtin)
+  (map move-tiro-inimigo ldtin))
+
 
 
 ;; desenha-tiro: Tiro Image Image -> Image
