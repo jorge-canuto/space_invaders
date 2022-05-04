@@ -15,11 +15,11 @@ Lista de tarefas a fazer
 - [X] Identificar informações constantes
 - [X] Identificar informações que mudam
 - [X] Identificar opções de big-bang
-- [ ] Definir dados
+- [X] Definir dados
 - [X] definir Constantes
-- [ ] Função main
-- [ ] Criar lista de desejos baseado nos chamados do big-bang 
-- [ ] Terminar a lista de desejos
+- [X] Função main
+- [X] Criar lista de desejos baseado nos chamados do big-bang 
+- [X] Terminar a lista de desejos
 
 ## License
 
