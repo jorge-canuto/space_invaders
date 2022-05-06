@@ -14,7 +14,6 @@
                                    ;(retorna uma imagem que representa o estado atual do mundo)
             (on-key    trata-tecla-jogo) ; Jogo KeyEvent -> Jogo
                                    ;(retorna um novo estado do mundo dado o estado atual e uma interação com o teclado)
-    
             (on-release release-tecla)   ; Jogo, keyEvent -> Jogo
                                    ;(retorna um novo estado do mundo dado o estado atual e uma interação com o teclado)
     )

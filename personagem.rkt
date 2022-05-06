@@ -69,14 +69,8 @@
    ;y:
    (personagem-y p)
    ;dx
-   ;;(if (or bateu-no-limite-direito? bateu-no-limite-esquerdo?)
-   ;;    (- (personagem-dx p)) ;then
-   ;;    (personagem-dx p))  ;else
    (personagem-dx p)
    ;dy
-   ;;(if (or bateu-no-limite-cima? bateu-no-limite-baixo?)
-   ;;    (- (personagem-dy p)) ;then
-   ;;    (personagem-dy p))  ;else
    (personagem-dy p)
    )
     )
@@ -88,11 +82,6 @@
 
 ;; stub
 ;;(define move-persongens ldp) ldp)
-
-;(define (move-personagens ldp)
-;  (cond [(empty? ldp) empty]                   ;CASO BASE (CONDIÇÃO DE PARADA)
-;        [else (cons (move-personagem (first ldp))                 ;String
-;                   (move-personagens (rest ldp)))])) ;RECURSÃO EM CAUDA
 
 (define (move-personagens ldp)
   (map move-personagem ldp)
@@ -136,24 +125,6 @@
 
 
 
-
-
-
-;; desenha-tela: Image Image -> Image
-;; desenha a tela de fundo do jogo
-
-;(define (desenha-tela img cena)
-;  (place-image img
-;               (/ ALTURA-CENARIO 2)
-;               (/ LARGURA-CENARIO 2)
-;               cena)
-;  )
-
-
-
-
-
-
 ;; desenha-personagem: Personagem Image Image -> Image
 ;; desenha o personagem na tela
 
@@ -167,8 +138,6 @@
                fundo
                )
   )
-
-
 
 
 

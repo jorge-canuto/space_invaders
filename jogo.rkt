@@ -72,9 +72,11 @@
     [(= (jogo-counter j) TEMPO-APARECE-INIMIGO)
       (make-jogo
       (move-personagem (jogo-nave j))
-      (move-personagens (cons (make-personagem (- LARGURA-CENARIO LARGURA-NAVE) novo-y-nave-inimiga 3 3) (jogo-ldin j)))
+      (move-personagens (gera-inimigo (jogo-ldin j) novo-y-nave-inimiga))
+;; criar função para adicionar inimigo
       (move-tiros (jogo-ldt j))
-      (move-varios-tiros-inimigos (cons (make-tiro (- LARGURA-CENARIO LARGURA-NAVE LARGURA-TIRO) novo-y-nave-inimiga DX-PADRAO-TIROS) (jogo-ldtin j)))
+      (move-varios-tiros-inimigos (gera-tiro (jogo-ldtin j) novo-y-nave-inimiga))
+;; criar função para adicionar tiro
       (- (jogo-counter j) TEMPO-APARECE-INIMIGO)
       (+ (jogo-score j) abate-por-tick)
       (jogo-game-over? j))
@@ -83,13 +85,40 @@
      (make-jogo
       (move-personagem (jogo-nave j))
       (move-personagens (remove* (second remocao-tiro-nave)(jogo-ldin j)))
+;; criar função
       (move-tiros (remove* (first remocao-tiro-nave)(jogo-ldt j)))
+;; criar função
       (move-varios-tiros-inimigos (jogo-ldtin j))
       (+ (jogo-counter j) 1)
       (+ (jogo-score j) abate-por-tick)
       (jogo-game-over? j))]
     )
    )
+  )
+
+
+
+
+
+;; gera-inimigo: List<personagem> Natural -> List<personagem>
+;; Gera um novo inimigo e adiciona na lista de inimigos
+
+;; stub
+;; (define (gera-inimigo ldin number) ldin)
+
+(define (gera-inimigo ldin novo-y-nave-inimiga)
+  (cons (make-personagem (- LARGURA-CENARIO LARGURA-NAVE) novo-y-nave-inimiga 3 3) ldin)
+  )
+
+
+;; gera-tiro: List<tiro> Natural -> List<tiro>
+;; Gera um novo tiro e adiciona na lista de tiros
+
+;; stub
+;; (define (gera-tiro ldtin number) ldtin)
+
+(define (gera-tiro ldtin novo-y-nave-inimiga)
+  (cons (make-tiro (- LARGURA-CENARIO LARGURA-NAVE LARGURA-TIRO) novo-y-nave-inimiga DX-PADRAO-TIROS) ldtin)
   )
 
 
@@ -116,16 +145,11 @@
 ;; stub
 ;; (define (nave-colidindo-com-algum-tiro? p ldtin) #false)
 
-;(define (nave-colidindo-com-algum-tiro? p ldtin)
-;  (cond [(empty? ldtin) #false]                   ;CASO BASE (CONDIÇÃO DE PARADA)
-;        [else (or (colidindo? p (first ldtin))                 
-;                   (colidindo-com-algum? p (rest ldtin)))])) ;RECURSÃO EM CAUDA
 
 (define (nave-colidindo-com-algum-tiro? p ldtin)
   (cond [(empty? ldtin) #false]                   ;CASO BASE (CONDIÇÃO DE PARADA)
         [else (or (colidindo-tiro? (first ldtin) p)                 
                    (nave-colidindo-com-algum-tiro? p (rest ldtin)))])) ;RECURSÃO EM CAUDA
-
 
 
 
@@ -227,8 +251,11 @@
 
 (define (trata-tecla-jogo j ke)
   (cond [(key=? ke TECLA-ATIRAR)
-         (make-jogo (jogo-nave j) (jogo-ldin j) (cons(make-tiro (+ (personagem-x (jogo-nave j)) (/ LARGURA-NAVE 2)) (personagem-y (jogo-nave j)) DX-PADRAO-TIROS) (jogo-ldt j)) (jogo-ldtin j) (jogo-counter j) (jogo-score j) (jogo-game-over? j))] 
-         [else (make-jogo (trata-tecla-nave (jogo-nave j) ke) (jogo-ldin j) (jogo-ldt j) (jogo-ldtin j) (jogo-counter j) (jogo-score j) (jogo-game-over? j))] 
+         (make-jogo (jogo-nave j) (jogo-ldin j)
+                    (cons(make-tiro (+ (personagem-x (jogo-nave j)) (/ LARGURA-NAVE 2)) (personagem-y (jogo-nave j)) DX-PADRAO-TIROS)
+                         (jogo-ldt j)) (jogo-ldtin j) (jogo-counter j) (jogo-score j) (jogo-game-over? j))] 
+         [else (make-jogo (trata-tecla-nave (jogo-nave j) ke) (jogo-ldin j) (jogo-ldt j) (jogo-ldtin j) (jogo-counter j) (jogo-score j)
+                          (jogo-game-over? j))] 
         ))
 
 
